@@ -5,6 +5,7 @@ import "./globals.css";
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
 import ScrollToTop from "@/components/ScrollToTop";
+import { siteConfig } from "@/config/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,8 +24,8 @@ const baloo = Baloo_2({
 });
 
 export const metadata: Metadata = {
-  title: "PRD Generator - Buat PRD Otomatis dengan AI",
-  description: "Aplikasi pembuat Product Requirements Document (PRD) otomatis menggunakan AI Gemini",
+  title: siteConfig.title,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

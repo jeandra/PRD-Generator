@@ -1,7 +1,6 @@
-export function trackEvent(
-  event: string,
-  metadata?: Record<string, string | number | boolean>
-) {
+import type { AnalyticsEvent, AnalyticsMetadata } from "@/constants/analytics";
+
+export function trackEvent(event: AnalyticsEvent, metadata?: AnalyticsMetadata) {
   if (typeof window === "undefined") return;
   void fetch("/api/analytics", {
     method: "POST",
