@@ -1,104 +1,38 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
+import { NextResponse, type NextRequest } from "next/server";
+import { requireUserId } from "@/server/auth";
+import { handleApiError, parseJson } from "@/server/http";
+import { restoreVersionSchema } from "@/server/schemas/prd";
+import {
+  listPrdVersions,
+  restorePrdVersion,
+} from "@/server/services/versions";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+type RouteContext = { params: Promise<{ id: string }> };
+
+export async function GET(_req: NextRequest, { params }: RouteContext) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    const userId = (session.user as { id: string }).id;
+    const userId = await requireUserId();
     const { id } = await params;
-
-    const prd = await prisma.prd.findFirst({
-      where: { id, userId },
-    });
-
-    if (!prd) {
-      return NextResponse.json({ error: "PRD tidak ditemukan" }, { status: 404 });
-    }
-
-    const versions = await prisma.prdVersion.findMany({
-      where: { prdId: id },
-      orderBy: { createdAt: "desc" },
-    });
+    const versions = await listPrdVersions(userId, id);
 
     return NextResponse.json({ versions });
-  } catch {
-    return NextResponse.json(
-      { error: "Terjadi kesalahan server" },
-      { status: 500 }
-    );
+  } catch (error) {
+    return handleApiError(error, "Terjadi kesalahan server");
   }
 }
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function POST(req: NextRequest, { params }: RouteContext) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    const userId = (session.user as { id: string }).id;
+    const userId = await requireUserId();
     const { id } = await params;
-    const { versionId } = await req.json();
-
-    if (!versionId || typeof versionId !== "string") {
-      return NextResponse.json(
-        { error: "versionId tidak valid" },
-        { status: 400 }
-      );
-    }
-
-    const prd = await prisma.prd.findFirst({
-      where: { id, userId },
-    });
-
-    if (!prd) {
-      return NextResponse.json({ error: "PRD tidak ditemukan" }, { status: 404 });
-    }
-
-    const targetVersion = await prisma.prdVersion.findFirst({
-      where: { id: versionId, prdId: id },
-    });
-
-    if (!targetVersion) {
-      return NextResponse.json(
-        { error: "Versi tidak ditemukan" },
-        { status: 404 }
-      );
-    }
-
-    // Simpan konten saat ini ke riwayat versi sebelum memulihkan
-    await prisma.prdVersion.create({
-      data: {
-        prdId: id,
-        content: prd.content,
-      },
-    });
-
-    const updated = await prisma.prd.update({
-      where: { id },
-      data: { content: targetVersion.content },
-    });
+    const { versionId } = await parseJson(req, restoreVersionSchema);
+    const prd = await restorePrdVersion(userId, id, versionId);
 
     return NextResponse.json({
-      prd: updated,
+      prd,
       message: "Versi berhasil dipulihkan",
     });
-  } catch {
-    return NextResponse.json(
-      { error: "Terjadi kesalahan server" },
-      { status: 500 }
-    );
+  } catch (error) {
+    return handleApiError(error, "Terjadi kesalahan server");
   }
 }

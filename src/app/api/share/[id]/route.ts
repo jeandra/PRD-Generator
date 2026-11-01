@@ -1,41 +1,16 @@
-import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { NextResponse, type NextRequest } from "next/server";
+import { handleApiError } from "@/server/http";
+import { getPublicPrd } from "@/server/services/prd";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+type RouteContext = { params: Promise<{ id: string }> };
+
+export async function GET(_req: NextRequest, { params }: RouteContext) {
   try {
     const { id } = await params;
-
-    const prd = await prisma.prd.findFirst({
-      where: { id, isPublic: true },
-      select: {
-        id: true,
-        title: true,
-        content: true,
-        createdAt: true,
-        updatedAt: true,
-        user: {
-          select: {
-            name: true,
-          },
-        },
-      },
-    });
-
-    if (!prd) {
-      return NextResponse.json(
-        { error: "Dokumen tidak ditemukan atau tidak dibagikan untuk publik" },
-        { status: 404 }
-      );
-    }
+    const prd = await getPublicPrd(id);
 
     return NextResponse.json({ prd });
-  } catch {
-    return NextResponse.json(
-      { error: "Terjadi kesalahan server" },
-      { status: 500 }
-    );
+  } catch (error) {
+    return handleApiError(error, "Terjadi kesalahan server");
   }
 }

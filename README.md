@@ -51,13 +51,13 @@ Aplikasi web untuk membuat Product Requirements Document (PRD) secara otomatis d
    Buat secret dengan `openssl rand -base64 32`, atau di PowerShell:
    `[Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))`
 
-3. Buat database dan tabel:
+3. Buat database dan jalankan migrasi:
 
    ```bash
-   npx prisma db push
+   npx prisma migrate deploy
    ```
 
-   Alternatif manual: jalankan `schema.sql` di MySQL.
+   Untuk pengembangan yang mengubah schema, gunakan `npm run db:migrate`.
 
 4. Jalankan development server:
 
@@ -75,6 +75,12 @@ Aplikasi web untuk membuat Product Requirements Document (PRD) secara otomatis d
 | `npm run build` | Build production |
 | `npm run start` | Jalankan hasil build |
 | `npm run lint` | ESLint |
+| `npm run typecheck` | Cek tipe TypeScript |
+| `npm test` | Unit test (Node test runner) |
+| `npm run db:migrate` | Buat/terapkan migrasi Prisma (dev) |
+| `npm run db:deploy` | Terapkan migrasi (production) |
+| `npm run db:push` | Sinkronisasi schema tanpa migrasi (khusus prototipe) |
+| `npm run db:studio` | Buka Prisma Studio |
 
 ## Struktur
 

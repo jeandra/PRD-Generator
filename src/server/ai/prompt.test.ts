@@ -1,6 +1,6 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
-import { buildPrompt } from "./gemini.ts";
+import { buildPrompt } from "./prompt.ts";
 
 describe("buildPrompt", () => {
   test("memuat PRD dengan technical plan dan implementation tasks", () => {
@@ -28,5 +28,18 @@ describe("buildPrompt", () => {
     });
 
     assert.ok(prompt.includes("# PRD: X"));
+  });
+
+  test("memakai instruksi template yang dipilih", () => {
+    const prompt = buildPrompt({
+      title: "X",
+      description: "Y",
+      targetUser: "Z",
+      problem: "W",
+      features: "V",
+      template: "Startup",
+    });
+
+    assert.ok(prompt.includes("Fokus pada MVP"));
   });
 });

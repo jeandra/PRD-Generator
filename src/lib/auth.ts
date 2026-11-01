@@ -2,9 +2,9 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
-import { randomBytes } from "node:crypto";
 import { prisma } from "./prisma";
 import { env } from "@/env";
+import { findOrCreateOAuthUser } from "@/server/services/users";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -59,17 +59,11 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === "google" && user.email) {
-        const existing = await prisma.user.findUnique({
-          where: { email: user.email.toLowerCase() },
+        const stored = await findOrCreateOAuthUser({
+          email: user.email,
+          name: user.name,
+          image: user.image,
         });
-        const stored = existing ?? (await prisma.user.create({
-          data: {
-            email: user.email.toLowerCase(),
-            name: user.name?.trim() || "Pengguna Google",
-            image: user.image,
-            password: randomBytes(32).toString("hex"),
-          },
-        }));
         user.id = stored.id;
       }
       return true;

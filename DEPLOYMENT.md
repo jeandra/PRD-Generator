@@ -19,7 +19,7 @@ Never commit `.env`, API keys, or database passwords. `.env.example` is safe to 
 2. Import the repository in Vercel.
 3. Add the environment variables above.
 4. Deploy with the existing build command (`next build`).
-5. Run `npx prisma db push` once against the production `DATABASE_URL`, or use a reviewed Prisma migration before the first deploy.
+5. Run `npx prisma migrate deploy` against the production `DATABASE_URL` before the first deploy (and on every schema change).
 6. Set `NEXTAUTH_URL` to the final HTTPS domain and redeploy.
 
 ## MySQL cloud
