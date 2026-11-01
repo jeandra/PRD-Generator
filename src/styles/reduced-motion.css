@@ -1,0 +1,228 @@
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   GLOBAL CLAYMORPHISM DESIGN SYSTEM EXTENSIONS
+   ========================================================================== */
+
+.clay-app-bg {
+  min-height: 100vh;
+  font-family: var(--font-clay), ui-rounded, "Segoe UI", system-ui, sans-serif;
+  background:
+    radial-gradient(900px 620px at 15% 4%, rgba(224, 210, 252, 0.75), transparent 60%),
+    radial-gradient(820px 520px at 86% 10%, rgba(204, 186, 246, 0.65), transparent 55%),
+    linear-gradient(160deg, #c2aee8 0%, #b89fe4 40%, #ac92dc 100%);
+  background-attachment: fixed;
+  color: #3b2d54;
+}
+
+.clay-surface {
+  position: relative;
+  background: linear-gradient(158deg, #fefbf7 0%, #fcf5ed 52%, #f8eee4 100%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 36px;
+  box-shadow:
+    22px 30px 56px -22px rgba(74, 50, 122, 0.35),
+    inset 4px 4px 14px rgba(255, 255, 255, 0.95),
+    inset -6px -8px 18px rgba(197, 173, 216, 0.25);
+}
+
+.clay-surface-sm {
+  position: relative;
+  background: linear-gradient(158deg, #ffffff 0%, #fbf6ef 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  box-shadow:
+    12px 16px 32px -12px rgba(74, 50, 122, 0.22),
+    inset 3px 3px 8px rgba(255, 255, 255, 0.9),
+    inset -3px -4px 10px rgba(197, 173, 216, 0.2);
+}
+
+.clay-nav {
+  background: rgba(254, 251, 247, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 9999px;
+  box-shadow:
+    0 14px 34px -10px rgba(74, 50, 122, 0.22),
+    inset 2px 2px 8px rgba(255, 255, 255, 0.9),
+    inset -2px -2px 6px rgba(197, 173, 216, 0.2);
+}
+
+.clay-pill-input {
+  background: #f5edf8;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  color: #3b2d54;
+  box-shadow:
+    inset 2px 3px 7px rgba(94, 67, 148, 0.12),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.85);
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.clay-pill-input:focus {
+  border-color: #ff8c70;
+  background: #ffffff;
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(255, 140, 112, 0.22),
+    inset 1px 1px 4px rgba(94, 67, 148, 0.06);
+}
+
+.clay-btn-coral {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(180deg, #ff8c70 0%, #ff6b57 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 9999px;
+  font-weight: 700;
+  font-family: inherit;
+  box-shadow:
+    0 10px 22px -6px rgba(255, 107, 87, 0.55),
+    inset 0 2px 4px rgba(255, 255, 255, 0.65),
+    inset 0 -3px 6px rgba(175, 52, 35, 0.4);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.clay-btn-coral:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 26px -6px rgba(255, 107, 87, 0.65),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -3px 6px rgba(175, 52, 35, 0.4);
+}
+
+.clay-btn-coral:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow:
+    0 4px 10px -4px rgba(255, 107, 87, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 3px rgba(175, 52, 35, 0.4);
+}
+
+.clay-btn-coral:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.clay-btn-purple {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(180deg, #8f74e6 0%, #7657d4 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 9999px;
+  font-weight: 700;
+  font-family: inherit;
+  box-shadow:
+    0 10px 22px -6px rgba(118, 87, 212, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.65),
+    inset 0 -3px 6px rgba(78, 51, 160, 0.4);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.clay-btn-purple:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 26px -6px rgba(118, 87, 212, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -3px 6px rgba(78, 51, 160, 0.4);
+}
+
+.clay-btn-purple:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow:
+    0 4px 10px -4px rgba(118, 87, 212, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 3px rgba(78, 51, 160, 0.4);
+}
+
+.clay-btn-purple:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.clay-btn-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f6edf9 100%);
+  color: #4b396b;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 9999px;
+  font-weight: 700;
+  font-family: inherit;
+  box-shadow:
+    0 8px 18px -6px rgba(74, 50, 122, 0.22),
+    inset 0 2px 4px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 4px rgba(197, 173, 216, 0.35);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.clay-btn-white:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: #ffffff;
+  box-shadow:
+    0 12px 22px -6px rgba(74, 50, 122, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 1),
+    inset 0 -2px 4px rgba(197, 173, 216, 0.3);
+}
+
+.clay-btn-white:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow:
+    0 4px 10px -4px rgba(74, 50, 122, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.clay-btn-white:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 9999px;
+  padding: 4px 14px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow:
+    inset 1px 1px 3px rgba(255, 255, 255, 0.9),
+    0 4px 10px -2px rgba(74, 50, 122, 0.15);
+}
+
+

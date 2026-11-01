@@ -85,13 +85,19 @@ Aplikasi web untuk membuat Product Requirements Document (PRD) secara otomatis d
 ## Struktur
 
 ```
-prisma/schema.prisma      Model User & Prd
-src/lib/gemini.ts         Prompt dan pemanggilan Gemini
-src/lib/auth.ts           Konfigurasi NextAuth
-src/app/api/              Endpoint register, generate, dan CRUD PRD
-src/app/dashboard/        Daftar PRD
-src/app/prd/new/          Form generate PRD
-src/app/prd/[id]/         Lihat, edit, dan export PRD
+src/app/(app)/dashboard/      Daftar PRD
+src/app/(app)/prd/new/        Wizard generate PRD
+src/app/(app)/prd/[id]/       Lihat, edit, versi, refine, export
+src/app/(public)/share/[id]/  PRD publik read-only
+src/app/api/                  Endpoint register, generate, CRUD, refine, versions, share
+src/components/               ui, layout, prd, markdown, auth
+src/hooks/                    useAuthGuard, useDebounce, usePrdList, usePrdDetail, ...
+src/server/                   auth guard, AI (Gemini), services, schemas
+src/lib/                      markdown, clipboard, export (pdf/docx/md)
+src/types/                    Prd, api, next-auth
+src/constants/                PRD, analytics
+src/styles/                   base, animations, prose, clay, reduced-motion
+prisma/                       schema & migrations
 ```
 
 ## Catatan

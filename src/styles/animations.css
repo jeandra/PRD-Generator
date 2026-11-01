@@ -1,0 +1,324 @@
+/* ---------- Keyframes ---------- */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-26px);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(26px, -20px) scale(1.06);
+  }
+  66% {
+    transform: translate(-20px, 16px) scale(0.95);
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  60%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: translateX(2px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-4px);
+  }
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.45);
+  }
+  50% {
+    box-shadow: 0 16px 45px -10px rgba(37, 99, 235, 0.75);
+  }
+}
+
+@keyframes bounce-dot {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.45;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---------- Animation utilities ---------- */
+
+.anim-in {
+  animation: fade-up 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.anim-fade {
+  animation: fade-in 0.5s ease-out both;
+  animation-delay: var(--d, 0ms);
+}
+
+.anim-scale {
+  animation: scale-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.anim-step {
+  animation: fade-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-page {
+  animation: page-pop 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+@keyframes page-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.clay-pill-input-error {
+  border-color: #ef4444 !important;
+  background: #fef2f2 !important;
+  box-shadow:
+    0 0 0 4px rgba(239, 68, 68, 0.2),
+    inset 1px 1px 4px rgba(239, 68, 68, 0.1) !important;
+}
+
+.anim-shake {
+  animation: shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.anim-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.anim-float-slow {
+  animation: float-slow 11s ease-in-out infinite;
+}
+
+.anim-drift {
+  animation: drift 18s ease-in-out infinite;
+}
+
+.anim-gradient {
+  background-size: 220% 220%;
+  animation: gradient-shift 9s ease infinite;
+}
+
+.anim-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+.anim-marquee:hover {
+  animation-play-state: paused;
+}
+
+.anim-glow {
+  animation: glow-pulse 3.5s ease-in-out infinite;
+}
+
+.text-gradient {
+  background-image: linear-gradient(100deg, #ffffff 10%, #e0f2fe 42%, #bfdbfe 62%, #ffffff 92%);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Scroll reveal (diatur oleh komponen Reveal) */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px) scale(0.99);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Efek kartu & tombol */
+.card-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px -20px rgba(15, 23, 42, 0.28);
+  border-color: #bfdbfe;
+}
+
+.btn-press {
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  animation: shimmer-sweep 2.4s ease-in-out infinite;
+}
+
+.dot-loading span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 4px;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: bounce-dot 1.2s ease-in-out infinite;
+}
+
+.dot-loading span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dot-loading span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.skeleton {
+  background-image: linear-gradient(
+    90deg,
+    #eef2f7 25%,
+    #e2e8f0 37%,
+    #eef2f7 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.5s ease infinite;
+}
+

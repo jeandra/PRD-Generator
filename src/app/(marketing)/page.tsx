@@ -10,7 +10,7 @@ import {
   FiArrowRight,
 } from "react-icons/fi";
 import { FaHeart } from "react-icons/fa";
-import Reveal from "@/components/Reveal";
+import Reveal from "@/components/ui/Reveal";
 import ClayCharacter from "@/components/auth/ClayCharacter";
 
 const features = [

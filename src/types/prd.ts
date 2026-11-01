@@ -18,6 +18,18 @@ export type PrdInput = {
   template?: PrdTemplate;
 };
 
+export type PrdWizardForm = {
+  title: string;
+  description: string;
+  targetUser: string;
+  problem: string;
+  features: string;
+  timeline: string;
+  constraints: string;
+  metrics: string;
+  template: PrdTemplate;
+};
+
 export type PrdSummary = {
   id: string;
   title: string;

@@ -2,9 +2,9 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Baloo_2 } from "next/font/google";
 import "./globals.css";
-import Providers from "@/components/Providers";
-import Navbar from "@/components/Navbar";
-import ScrollToTop from "@/components/ScrollToTop";
+import Providers from "@/components/layout/Providers";
+import Navbar from "@/components/layout/Navbar";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 import { siteConfig } from "@/config/site";
 
 const geistSans = Geist({
